@@ -1,17 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { App, App2 } from "./App";
+import Counter from "./react-getting-started/components/Counter";
+
+let runApp = "Counter";
+
+function SelectApp({ appName }) {
+  switch (appName) {
+    case "App":
+      console.log("Inside App");
+      return <App />;
+    case "App2":
+      console.log("Inside App2");
+      return <App2 />;
+    case "Counter":
+      console.log("Inside Counter");
+      return <Counter />;
+
+    default:
+      console.log("No app selected");
+      return "No app selected";
+  }
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SelectApp appName={runApp} />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
