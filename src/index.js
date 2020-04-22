@@ -1,21 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { App, App2 } from "./App";
+import { App } from "./App";
 import Counter from "./react-getting-started/components/Counter";
+import GithubCards from "./react-getting-started/components/GithubCards";
 
-let runApp = "Counter";
+let runApp = "GithubCards";
 
 function SelectApp({ appName }) {
   switch (appName) {
     case "App":
       console.log("Inside App");
       return <App />;
-    case "App2":
-      console.log("Inside App2");
-      return <App2 />;
     case "Counter":
       console.log("Inside Counter");
       return <Counter />;
+    case "GithubCards":
+      console.log("Inside GithubCards");
+      return <GithubCards title="⚛️ The GitHub Cards App" />;
 
     default:
       console.log("No app selected");
