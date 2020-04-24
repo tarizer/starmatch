@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "../assets/StarMatch.module.css";
 
+function StarsDisplay({ stars }) {
+  return (
+    <>
+      {utils.range(1, stars).map((starId) => (
+        <div key={starId} className={style.star} />
+      ))}
+    </>
+  );
+}
+
+function ButtonDigit({ id }) {
+  return (
+    <button id={id} className={style.number}>
+      {id}
+    </button>
+  );
+}
+
 function StarMatch({ title }) {
-  const stars = utils.random(1, 9);
+  const [stars, setStars] = useState(utils.random(1, 9));
+  const [availableNumbers, setAvailableNumbers] = useState(utils.range(1, 5));
+  const [candidateNumbers, setCandidateNumbers] = useState(utils.range(2, 3));
+
+  const numberStatus = (number) => {
+    if (!availableNumbers.includes(number)) {
+      return "used";
+    }
+    if (!candidateNumbers.includes(number)) {
+      return "...";
+    }
+    return "available";
+  };
+
   document.querySelector("title").innerText = title.slice(2);
   return (
     <div className={style.game}>
@@ -12,16 +43,12 @@ function StarMatch({ title }) {
       </div>
       <div className={style.body}>
         <div className={style.left}>
-          {utils.range(1, stars).map((starId) => (
-            <div key={starId} className={style.star} />
-          ))}
+          <StarsDisplay stars={stars} />
         </div>
 
         <div className={style.right}>
           {utils.range(1, 9).map((buttonId) => (
-            <button key={buttonId} className={style.number}>
-              {buttonId}
-            </button>
+            <ButtonDigit key={buttonId} id={buttonId} />
           ))}
         </div>
       </div>
